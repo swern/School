@@ -7,25 +7,29 @@ class TestSchool < Minitest::Test
 
 
 def setup
-  student1_params = {name: "fufu", subject: "ruby"}
-  student2_params = {name: "cucu", subject: "java"}
-  student1 = Student.new(student1_params)
-  student2 = Student.new(student2_params)
-  students = [student1, student2]
+  @student1 = Student.new({name: "fufu", subject: "ruby"})
+  @student2 = Student.new({name: "cucu", subject: "java"})
 
-@school=School.new("CodeClan", students)
-
-  
+  @school=School.new("CodeClan")  
 end
 
 
   def test_school_name
-    assert_equal("CodeClan", @school.get_name)
+    assert_equal("CodeClan", @school.name)
   end
 
- def test_how_many_students
-  assert_equal(2, @school.number_of_students)
- end
+  def test_add_student()
+    @school.add_student(@student2)
+    assert_equal(1, @school.students.length)
+  end
 
-  
+  def test_remove_student()
+    @school.add_student(@student2)
+    @school.remove_student("cucu")
+    assert_equal(0, @school.students.length)
+  end
+
+ # def test_how_many_students
+ #  assert_equal(2, @school.number_of_students)
+ # end
 end

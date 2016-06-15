@@ -1,19 +1,25 @@
-require_relative( 'student' )
+# require_relative( 'student' )
 # require_relative( 'teachers' )
 class School
 
-
-  def initialize(name, students)
+attr_reader :name, :students
+  def initialize(name)
     @name = name
-    @students = students
+    @students = []
     # @teachers = teachers
   end
 
-  def get_name
-    return @name
+  def add_student(student)
+    @students.push(student)
   end
 
-
+  def remove_student(student_name)
+    student_to_delete = nil
+    for student in @students
+      student_to_delete = student if student.name == student_name
+    end
+    @students.delete(student_to_delete)
+  end
 
 
 end
